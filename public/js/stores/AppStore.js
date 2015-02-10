@@ -9,58 +9,51 @@ var EventEmitter = require('events').EventEmitter;
 
 var CHANGE_EVENT = 'change';
 
-var _files = {};
-var _levels = {};
-var _isDragging = {};
-var _isLoading = {};
+var _code = '';
+var _data = [];
 
 
 
-var updateLevels = function(levels, cloudService) {
-  _levels[cloudService] = levels;
+var updateCode = function(code) {
+  _code = code;
 }
 
-var enterFolder = function(folderName, cloudService) {
-  _levels[cloudService].push(folderName);
+var updateData = function(data) {
+  _data = data;
 }
 
-var updateFiles = function(files, cloudService) {
-  _files[cloudService] = files;
-}
+var compileCode = function() {
+  var data = [];
 
-var setLoading = function(cloudService, bool) {
-  console.log('setting loading', cloudService, bool);
-  _isLoading[cloudService] = bool;
-}
+  try {
+    eval(_code);
+  } catch(e) {
+    var err = e.constructor('Error in Evaled Script: ' + e.message);
+    // +3 because `err` has the line number of the `eval` line plus two.
+    err.lineNumber = e.lineNumber - err.lineNumber + 3;
+    console.log(err);
+  }
 
-var setDragging = function(cloudService, bool) {
-  _isDragging[cloudService] = bool;
+  _data = data;
 }
 
 var AppStore = assign({}, EventEmitter.prototype, {
 
   initialize: function(cloudService) {
-    _levels[cloudService] = [cloudService];
-    _files[cloudService] = [];
-    _isDragging[cloudService] = false;
-    _isLoading[cloudService] = false;
+    _code = 'for (var x = 1; x <= 10; x++) {\n' +
+           '  var y = Math.floor(Math.random() * 10);\n' +
+           '  data.push([x, y]);\n' +
+           '}';
+    _data = [];
   },
 
   //return an object with all of the files
-  getFiles: function(cloudService) {
-    return _files[cloudService];
+  getCode: function() {
+    return _code;
   },
 
-  isDragging: function(cloudService) {
-    return _isDragging[cloudService];
-  },
-
-  isLoading: function(cloudService) {
-    return _isLoading[cloudService];
-  },
-
-  getLevels: function(cloudService) {
-    return _levels[cloudService];
+  getData: function() {
+    return _data;
   },
 
   emitChange: function() {
@@ -80,24 +73,16 @@ var AppStore = assign({}, EventEmitter.prototype, {
     var action = payload.action; 
     switch(action.actionType){
       
-      case AppConstants.UPDATE_LEVELS:
-        updateLevels(action.levels, action.cloudService);
+      case AppConstants.CHANGE_CODE:
+        updateCode(action.code);
         break;
 
-      case AppConstants.ENTER_FOLDER:
-        enterFolder(action.folderName, action.cloudService);
+      case AppConstants.CHANGE_DATA:
+        updateData(action.data);
         break;
 
-      case AppConstants.UPDATE_FILES:
-        updateFiles(action.files, action.cloudService);
-        break;
-
-      case AppConstants.SET_LOADING:
-        setLoading(action.cloudService, action.bool);
-        break;
-
-      case AppConstants.SET_DRAGGING:
-        setDragging(action.cloudService, action.bool);
+      case AppConstants.COMPILE:
+        compileCode();
         break;
     }
 

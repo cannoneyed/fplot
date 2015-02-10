@@ -67,46 +67,11 @@ gulp.task('compress', function() {
     .pipe(gulp.dest('dist/js'))
 });
 
-
-
-gulp.task('copy', function() {
-  gulp.src('public/*.html')
-    .pipe(gulp.dest('dist'));
-  gulp.src('public/css/*.css')
-    .pipe(gulp.dest('dist/css'));
-  gulp.src('public/assets/*.*')
-    .pipe(gulp.dest('dist/assets'));
-});
-
-gulp.task('browserify-stock', function(){
-  gulp.src('public/js/main-stock.js')
-    .pipe(browserify({transform: 'reactify'}))
-    .pipe(concat('main.js'))
-    .pipe(gulp.dest('dist/stock/js'));
-});
-
-gulp.task('copy-stock', function() {
-  gulp.src('public/index.html')
-    .pipe(gulp.dest('dist/stock'));  
-  gulp.src('public/css/*.css')
-    .pipe(gulp.dest('dist/stock/css'));  
-  gulp.src('public/assets/*.*')
-    .pipe(gulp.dest('dist/stock/assets'))
-});
-
-gulp.task('stock', ['browserify-stock', 'copy-stock']);
-
-gulp.task('watch-stock', function() {
-  gulp.watch('public/**/*.*', ['stock']);
-});
-
-
 gulp.task('run', shell.task([
-  'cd server && nodemon app.js'
+  'cd server && nodemon server.js'
 ]));
 
-gulp.task('build', ['clean', 'compile', 'sass', 'copy']);
-
+gulp.task('build', ['clean', 'compile', 'sass']);
 
 gulp.task('default', ['build', 'watch', 'run']);
 

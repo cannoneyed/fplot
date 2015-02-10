@@ -2,49 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>CloudBalance</title>
+  <title>fPlot</title>
   <link rel="stylesheet" media="screen" href="css/style.min.css">
-  <script src="bower_components/oauth-js/dist/oauth.js"></script>
+
   <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
   <script src="bower_components/react/react.js"></script>
-  <script src="bower_components/react-intl/dist/react-intl.min.js"></script>
 </head>
 <body>
 
   <!-- Fixed navbar -->
   <div class="navbar navbar-default">
-    <div class="container">
+    <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#"><img src="img/cloudBalance_header.png" class="logo header"></a>
-      </div>
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">CloudBalance</a>
-      </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="#contact">Logout</a></li>
-        </ul>
-      </div><!--/.nav-collapse -->
-    </div>
-  </div>
-
-<div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-5">
-    <div class="panel panel-default holder">
-      <div class="panel-body">
-        <div id="Dropbox"></div>
+        <a class="navbar-brand" href="#">fPlot</a>
       </div>
     </div>
   </div>
-  <div class="col-md-5">
-    <div class="panel panel-default holder">
-      <div class="panel-body">
-        <div id="Google"></div>
-      </div>
-    </div>
-  </div>
-</div>
+  
+  <div id="App"></div>
 
 
 <script src="js/main.js"></script>

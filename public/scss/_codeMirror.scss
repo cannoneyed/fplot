@@ -4,8 +4,8 @@
   /* Set height, width, borders, and global font properties here */
   font-family: monospace;
   font-size: 16px;
-  height: 500px;
-  padding-top: 20px;
+  height: $input-height;
+  padding-top: $input-margin;
 }
 
 /* PADDING */

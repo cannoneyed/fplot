@@ -1,6 +1,10 @@
+$input-height: 500px;
+$input-margin: 20px;
+
 @import "../../dist/bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "codeMirror";
 @import "./codeMirror/theme/solarized";
+
 
 
 body {
@@ -9,6 +13,8 @@ body {
 }
 
 .dataInput {
-  margin-top: 20px;
-  min-height: 500px;
+  margin-top: $input-margin;
+  min-height: $input-height - 35px;
+  font-family: monospace;
+  font-size: 16px;
 }

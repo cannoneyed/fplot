@@ -4,10 +4,14 @@
   <meta charset="UTF-8">
   <title>fPlot</title>
   <link rel="stylesheet" media="screen" href="css/style.min.css">
+  <link href="bower_components/c3/c3.css" rel="stylesheet" type="text/css">
 
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
   <script src="bower_components/react/react.js"></script>
+  <script src="bower_components/d3/d3.min.js" charset="utf-8"></script>
+  <script src="bower_components/c3/c3.min.js"></script>
+
 </head>
 <body>
 
@@ -23,35 +27,12 @@
   <div id="App"></div>
 
 
+
+
 <script src="js/main.js"></script>
 
 <script>
-  var onDragEnter = function(event) {
-      event.preventDefault();
-      $(this).addClass("dragover");
-  }, 
 
-  onDragOver = function(event) {
-      event.preventDefault(); 
-      if(!$(this).hasClass("dragover"))
-          $(this).addClass("dragover");
-  }, 
-
-  onDragLeave = function(event) {
-      event.preventDefault();
-      $(this).removeClass("dragover");
-  },
-
-  onDrop = function(event) {
-      $(this).removeClass("dragover");
-  };
-
-  var holder = $('.holder');
-
-  holder.on("dragenter", onDragEnter);
-  holder.on("dragover", onDragOver);
-  holder.on("dragleave", onDragLeave);
-  holder.on("drop", onDrop);
 
 
 </script>

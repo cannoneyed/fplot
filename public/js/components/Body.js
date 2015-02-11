@@ -5,6 +5,7 @@
 var React = require('react');
 var Panel = require('react-bootstrap/Panel');
 var InputArea = require('./InputArea');
+var Graph = require('./Graph');
 
 module.exports = React.createClass({
 
@@ -20,7 +21,7 @@ module.exports = React.createClass({
         </div>
         <div className="col-md-5">
           <Panel>
-            Basic panel example
+            <Graph data={this.props.data} />
           </Panel>
         </div>
       </div>

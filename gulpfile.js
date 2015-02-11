@@ -47,10 +47,16 @@ gulp.task('sass', function(done) {
 });
 
 
+
 gulp.task('clean', function () {
-  return gulp.src(['dist/js'], {read: false})
+  return gulp.src(['dist/js', 'dist/index.html'], {read: false})
     .pipe(clean());
 });
+
+gulp.task('copy', function () {
+  return gulp.src(paths.html)
+    .pipe(gulp.dest('dist/'));
+})
 
 gulp.task('compile', function(){
   var b = browserify();
@@ -71,7 +77,7 @@ gulp.task('run', shell.task([
   'cd server && nodemon server.js'
 ]));
 
-gulp.task('build', ['clean', 'compile', 'sass']);
+gulp.task('build', ['clean', 'compile', 'copy', 'sass']);
 
 gulp.task('default', ['build', 'watch', 'run']);
 

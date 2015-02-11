@@ -12,13 +12,21 @@ module.exports = React.createClass({
     // Actions.updateData(this.);
   },
 
+  displayData: function () {
+    var data = JSON.stringify(this.props.data);
+    data = data.slice(1, data.length - 1);
+    data = data.split('],[').join('], [');
+    
+    return data;
+  },
+
   render: function () {
 
     var data = this.props.data;
 
     return (
       <div>
-        <Input className={'dataInput'} type="textarea" />
+        <Input className={'dataInput'} type="textarea" value={this.displayData()} />
         <Button bsStyle="primary" className={'pull-right'} onClick={this.display} >Display</Button>
       </div>
     );
